@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Użytkownicy biblioteki{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h1 class="mb-4">Zarejestrowani użytkownicy</h1>
+
+    {% if users %}
+    <ul class="list-group">
+        {% for user in users %}
+        <li class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+                <strong>{{ loop.index }}. {{ user.get_info() }}</strong>
+            </div>
+            {% if user.borrowed_items %}
+            <div class="mt-2">
+                <h6>Wypożyczone:</h6>
+                <ul class="list-group list-group-flush ms-3">
+                    {% for item in user.borrowed_items %}
+                    <li class="list-group-item py-1 px-2">{{ item.title }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        Brak zarejestrowanych użytkowników.
+    </div>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}" class="btn btn-primary mt-4">Wróć do strony głównej</a>
+</div>
+{% endblock %}

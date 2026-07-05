@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Lista Mediów{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Media w bibliotece</h2>
+
+<ul class="list-group mb-4">
+    {% for media in media_list %}
+    <li class="list-group-item">{{ media.get_info() }}</li>
+    {% else %}
+    <li class="list-group-item text-muted">Brak mediów w bibliotece.</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('index') }}" class="btn btn-secondary">Wróć</a>
+{% endblock %}

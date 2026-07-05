@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Biblioteka{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Witaj w Bibliotece</h1>
+
+<ul class="list-group mb-4">
+    <li class="list-group-item"><a href="{{ url_for('show_media') }}">📚 Przeglądaj media</a></li>
+    <li class="list-group-item"><a href="{{ url_for('add_book') }}">➕ Dodaj książkę</a></li>
+    <li class="list-group-item"><a href="{{ url_for('add_movie') }}">🎬 Dodaj film</a></li>
+    <li class="list-group-item"><a href="{{ url_for('register_user') }}">🧑 Zarejestruj użytkownika</a></li>
+    <li class="list-group-item"><a href="{{ url_for('show_users') }}">👥 Przeglądaj użytkowników</a></li>
+    <li class="list-group-item"><a href="{{ url_for('borrow_media') }}">📖 Wypożycz media</a></li>
+    <li class="list-group-item"><a href="{{ url_for('undo_last_command') }}">↩️ Cofnij ostatnie wypożyczenie</a></li>
+    <li class="list-group-item"><a href="{{ url_for('sort_media') }}">🔤 Sortuj media</a></li>
+</ul>
+
+<div class="d-grid gap-2 d-md-block mb-3">
+    <form action="{{ url_for('save_media') }}" method="post" class="d-inline">
+        <button type="submit" class="btn btn-success mb-2">💾 Zapisz media do pliku</button>
+    </form>
+
+    <form action="{{ url_for('load_media') }}" method="post" class="d-inline">
+        <button type="submit" class="btn btn-secondary mb-2">📂 Wczytaj media z pliku</button>
+    </form>
+
+    <form action="{{ url_for('save_users') }}" method="post" class="d-inline">
+        <button type="submit" class="btn btn-success mb-2">💾 Zapisz użytkowników do pliku</button>
+    </form>
+
+    <form action="{{ url_for('load_users') }}" method="post" class="d-inline">
+        <button type="submit" class="btn btn-secondary mb-2">📂 Wczytaj użytkowników z pliku</button>
+    </form>
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="alert alert-success mt-3" role="alert">
+    <ul class="mb-0">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endwith %}
+{% endblock %}
